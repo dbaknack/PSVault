@@ -1,6 +1,16 @@
-## SQLUtility Class
+# SQLUtility Class
 
-The `SQLUtility` class is a PowerShell utility class designed for managing SQL-related secrets and interacting with a secrets vault. It provides various methods to facilitate secrets management and vault operations.
+<p>
+ The `SQLUtility` class is a PowerShell utility class designed for managing SQL-related secrets and interacting with a secrets vault.<br>
+ It provides various methods to facilitate secrets management and vault operations.
+</p>
+
+> **Note:** When the script is dot sourced, any functions, variables, or aliases defined within the script will be available in the current scope.<br>This can be useful when you want to reuse code or load a script that defines functions or variables needed in the current context.
+
+```
+. .\PSSQLQueryStoreTool\SQLUtility.ps1
+```
+
 
 ### Property Declaration
 
