@@ -1,14 +1,14 @@
 class SQLUtility{
 	$Properties = @{
 		VaultProperties = @{
-			VaultName 			= [string]''
+			VaultName 		= [string]''
 			VaultDescription 	= [string]''
 		}
 		SecretProperties = @{
 			ExpireInDays 	= [int]1
 			test = [int]
 			SecretTypes 	= @{
-				Login 		= @('SQLLogin','WindowsAuthentication')
+				Login 	= @('SQLLogin','WindowsAuthentication')
 			}
 		}
 	}
@@ -106,7 +106,7 @@ class SQLUtility{
 		return $isVaultCreated
 	}
 	[psobject]GetSecret([string]$SecretName){
-	$Secret 			=  Get-Secret -name $SecretName  -AsPlainText
+	$Secret 		=  Get-Secret -name $SecretName  -AsPlainText
 	$SecretEncrypted 	=  Get-Secret -name $SecretName
 
 	$secretTable = [ordered]@{
@@ -118,8 +118,8 @@ class SQLUtility{
 	}
 	[boolean]RemoveSecretsVault(){
 		$isVaultRemoved = $false
-		$VaultName = $this.GetProperty('VaultName')
-		$isVault = Get-SecretVault -Name $VaultName
+		$VaultName 	= $this.GetProperty('VaultName')
+		$isVault 	= Get-SecretVault -Name $VaultName
 
 		if($isVault){
 			try{
@@ -139,7 +139,7 @@ class SQLUtility{
 		return  Get-SecretVault $VaultName 
 	}
 	[psobject]SetSecret([string]$VaultName,[string]$SetSecretType,[string]$SecretName,[hashtable]$SetSecretParams){
-		$isSecretSet 		= $false
+		$isSecretSet 			= $false
 		$Secret 			= [hashtable]
 		#$LoginType 			= $SetSecretParams.LoginType
 		$SecureCredentials 	= [hashtable]
@@ -171,9 +171,9 @@ class SQLUtility{
 								
 						# set the secret here
 						$Secret = @{
-							InstanceName = $SetSecretParams.InstanceName
+							InstanceName 	= $SetSecretParams.InstanceName
 							UserName 	= $SecureCredentials.UserName
-							Password = $SecureCredentials.Password}
+							Password 	= $SecureCredentials.Password}
 					}
 			}
 			default {Write-Verbose -Message 'only login type secrets can be set with this method' -Verbose
@@ -204,7 +204,7 @@ class SQLUtility{
 	}
 	[psobject]ConvertPasswordToSecureString([hashtable]$SuppliedCreds){
 		# password needs to be converted to secure string
-		$PasswordSecureString 	= ConvertTo-SecureString $SuppliedCreds.Password -AsPlainText -Force
+		$PasswordSecureString 		= ConvertTo-SecureString $SuppliedCreds.Password -AsPlainText -Force
 		$credentials 			= New-Object System.Management.Automation.PSCredential($SuppliedCreds.Username,$PasswordSecureString)
 		return $credentials
 	}
